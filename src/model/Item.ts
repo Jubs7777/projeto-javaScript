@@ -55,5 +55,48 @@ public set quantidade(quantidade:number){
 }
 
 
+public visualizar(): void {
+
+    let tipo: string = "";
+
+    switch (this._tipo) {
+        case 1:
+        tipo = "Blusa";
+        break;
+
+        case 2:
+        tipo = "Calça";
+        break;
+
+        case 3:
+        tipo = "Jaqueta";
+        break;
+        }
+
+
+
+
+console.log("\n\n*****************************************************");
+console.log("Dados do Item:");
+console.log("*****************************************************");
+console.log("Nome do Item: ", this._nome);
+console.log("Tipo do Item: ", this._tipo);
+console.log("Cor do Item: ", this._cor);
+console.log("Tamanho do Item: ", this._tamanho);
+console.log("Quantidade: ", this._quantidade);
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
 
 }
