@@ -1,16 +1,24 @@
 import { colors } from './src/util/Colors';
 import readlinksync = require ("readline-sync");
-
+import { ItemBlusa } from './src/model/ItemBlusa';
+import { ItemCalca } from './src/model/ItemCalca';
 
 export function main(){
 
 let opcao: number;
 
+const itemblusa: ItemBlusa = new ItemBlusa("Blusa de Inverno",1,"Manga Longa","Marrom","M",15);
+itemblusa.visualizar();
+
+const itemcalca: ItemCalca = new ItemCalca("Calça Jeans", 2, "Cargo","Bege",40, 30);
+itemcalca.visualizar();
+
+
+
 while(true){
 
         console.log(colors.bg.black, colors.fg.blue,
                     "\n*****************************************************");
-        console.log("*****************************************************");
         console.log("                                                     ");
         console.log("                Loja Closet da Ju                    ");
         console.log("                                                     ");
@@ -101,6 +109,6 @@ console.log("\nPressione enter para continuar...");
 readlinksync.prompt();
 }
 
-
+// Colocar a numeração e o tamanho em calça e blusa.
 
 main();

@@ -1,16 +1,17 @@
-export class Item{
+export abstract class Item{
 
 private _nome:string;
 private _tipo:number;
+private _modelo: string;
 private _cor: string;
-private _tamanho: number;
 private _quantidade: number;
 
-constructor(nome:string, tipo:number, cor:string, tamanho:number, quantidade:number ){
+
+constructor(nome:string, tipo:number,modelo: string ,cor:string, quantidade:number ){
 this._nome = nome;
 this._tipo = tipo;
+this._modelo = modelo;
 this._cor = cor;
-this._tamanho = tamanho;
 this._quantidade = quantidade;
 }
 
@@ -30,20 +31,22 @@ public set tipo(tipo:number){
     this._tipo = tipo;
 }
 
+
+public get modelo(){
+    return this._modelo;
+}
+
+public set modelo(modelo:string){
+    this._modelo = modelo;
+}
+
+
 public get cor(){
     return this._cor;
 }
 
 public set cor(cor:string){
     this._cor = cor;
-}
-
-public get tamanho(){
-    return this._tamanho;
-}
-
-public set tamanho(tamanho:number){
-    this._tamanho = tamanho;
 }
 
 public get quantidade(){
@@ -68,9 +71,7 @@ public visualizar(): void {
         tipo = "Calça";
         break;
 
-        case 3:
-        tipo = "Jaqueta";
-        break;
+    
         }
 
 
@@ -79,11 +80,11 @@ public visualizar(): void {
 console.log("\n\n*****************************************************");
 console.log("Dados do Item:");
 console.log("*****************************************************");
-console.log("Nome do Item: ", this._nome);
-console.log("Tipo do Item: ", this._tipo);
-console.log("Cor do Item: ", this._cor);
-console.log("Tamanho do Item: ", this._tamanho);
-console.log("Quantidade: ", this._quantidade);
+console.log("Nome do Item: " + this._nome);
+console.log("Tipo do Item: " + this.tipo);
+console.log("Modelo: " + this._modelo);
+console.log("Cor: " + this._cor);
+console.log("Quantidade: " + this._quantidade);
 
 
 

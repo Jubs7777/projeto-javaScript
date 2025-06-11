@@ -2,21 +2,27 @@ import { Item } from "./Item";
 
 export class ItemBlusa extends Item{
 
-    private _modelo: number;
+    private _tamanho: string;
 
-constructor(nome:string, tipo:number, cor:string, tamanho:number, quantidade:number, modelo:number){
-super(nome, tipo, cor, tamanho, quantidade);
-this._modelo = modelo;
+constructor(nome:string, tipo:number, modelo: string, cor:string, tamanho:string, quantidade:number){
+super(nome, tipo,modelo, cor, quantidade);
+this._tamanho = tamanho;
 }
 
-public get modelo(){
-return this._modelo;
+public get tamanho(){
+return this._tamanho;
 }
 
-public set modelo(modelo:number){
-this._modelo = modelo;
+public set tamanho(tamanho:string){
+this._tamanho = tamanho;
 }
 
 
+
+
+public visualizar(): void {
+super.visualizar();
+console.log("Tamanho: ", this._tamanho);
+}
 
 }
