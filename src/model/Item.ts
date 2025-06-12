@@ -9,7 +9,7 @@ private _quantidade: number;
 
 
 constructor(numero: number, nome:string, tipo:number,modelo: string ,cor:string, quantidade:number ){
-this._numero = this.numero;
+this._numero = numero;
 this._nome = nome;
 this._tipo = tipo;
 this._modelo = modelo;

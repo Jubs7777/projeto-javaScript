@@ -187,7 +187,7 @@ export function sobre(): void {
     console.log("\n*****************************************************");
     console.log("Projeto Desenvolvido por: Juliana Vieira ");
     console.log("Generation Brasil - senavieira.74@gmail.com");
-    console.log("github.com/conteudoGeneration");
+    console.log("github.com/Jubs7777");
     console.log("*****************************************************");
 }
 
