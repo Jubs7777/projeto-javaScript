@@ -1,5 +1,6 @@
 export abstract class Item{
 
+private _numero: number;
 private _nome:string;
 private _tipo:number;
 private _modelo: string;
@@ -7,12 +8,21 @@ private _cor: string;
 private _quantidade: number;
 
 
-constructor(nome:string, tipo:number,modelo: string ,cor:string, quantidade:number ){
+constructor(numero: number, nome:string, tipo:number,modelo: string ,cor:string, quantidade:number ){
+this._numero = this.numero;
 this._nome = nome;
 this._tipo = tipo;
 this._modelo = modelo;
 this._cor = cor;
 this._quantidade = quantidade;
+}
+
+public get numero(){
+    return this._numero;
+}
+
+public set numero(numero:number){
+    this._numero = this._numero;
 }
 
 public get nome(){
@@ -71,15 +81,13 @@ public visualizar(): void {
         tipo = "Calça";
         break;
 
-    
         }
-
-
 
 
 console.log("\n\n*****************************************************");
 console.log("Dados do Item:");
 console.log("*****************************************************");
+console.log("Número do Item: " + this._numero);
 console.log("Nome do Item: " + this._nome);
 console.log("Tipo do Item: " + this.tipo);
 console.log("Modelo: " + this._modelo);

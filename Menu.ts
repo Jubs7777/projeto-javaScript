@@ -2,18 +2,25 @@ import { colors } from './src/util/Colors';
 import readlinksync = require ("readline-sync");
 import { ItemBlusa } from './src/model/ItemBlusa';
 import { ItemCalca } from './src/model/ItemCalca';
+import { ItemController } from './src/controller/ItemController';
 
 export function main(){
 
-let opcao: number;
+let Item : ItemController = new ItemController();
 
-const itemblusa: ItemBlusa = new ItemBlusa("Blusa de Inverno",1,"Manga Longa","Marrom","M",15);
-itemblusa.visualizar();
+let opcao, tipo,tamanho, numeracao, quantidade, numero: number;
+let nome, modelo, cor: string;
+const tipoItens = ["Item Blusa", "Item Calca"];
 
-const itemcalca: ItemCalca = new ItemCalca("Calça Jeans", 2, "Cargo","Bege",40, 30);
-itemcalca.visualizar();
+console.log("\nAdicionar Item\n");
 
+let it1: ItemBlusa = new ItemBlusa(Item.gerarNumero(),"Blusa de Inverno",1,"Manga Longa","Marrom",38,15);
+Item.cadastrar(it1);
 
+let it2: ItemCalca = new ItemCalca(Item.gerarNumero(),"Calça Jeans", 2, "Cargo","Bege",40, 30);
+Item.cadastrar(it2);
+
+Item.listarTodas();
 
 while(true){
 
@@ -46,39 +53,121 @@ while(true){
         process.exit(0);
         }
 
-        switch(opcao){
+        switch (opcao) {
             case 1:
-            console.log(colors.fg.whitestrong, "\n\n\Adicionar Item\n\n", colors.reset);
+                console.log(colors.fg.whitestrong, "\n\nAdicionar Item\n\n", colors.reset);
+
+                console.log("Digite o Nome do Item: ");
+                nome = readlinksync.question("");
+
+                console.log("\nDigite o tipo do Item: ");
+                tipo = readlinksync.keyInSelect(tipoItens, "", { cancel: false }) + 1;
+
+                console.log("\nDigite o modelo: ");
+                modelo = readlinksync.question("");
+
+                console.log("\nDigite a cor: ");
+                cor = readlinksync.question("");
+
+                console.log("\nDigite a quantidade: ");
+                quantidade = readlinksync.questionInt("");
+
+        switch(tipo){
+            case 1:
             
+        console.log("\nDigite o número do tamanho: [38 - P ] - [40 - M] - [42 - G] ");
+        tamanho = readlinksync.questionInt("");
+        Item.cadastrar(new ItemBlusa(Item.gerarNumero(), nome, tipo,modelo, cor, quantidade,tamanho));
+        break;
+
+        case 2:
+
+        console.log("\nDigite a numeração:");
+        numeracao = readlinksync.questionInt("");
+        Item.cadastrar(new ItemCalca(Item.gerarNumero(),nome, tipo, modelo, cor, quantidade, numeracao));
+        break;
+                }
+
             keyPress();
             break;
 
             case 2: 
-            console.log(colors.fg.whitestrong, "\n\nListar todos os Itens", colors.reset);
+            console.log(colors.fg.whitestrong, "\n\nListar todos os Itens\n\n", colors.reset);
             
+            Item.listarTodas();
+
+
             keyPress();
             break;
 
             case 3:
-            console.log(colors.fg.whitestrong, "\n\nBuscar o Item por Número\n\n", colors.reset);
+            console.log(colors.fg.whitestrong, "\n\nBuscar o Item por Nome\n\n", colors.reset);
             
+            console.log("Digite o número do Item: ");
+            numero = readlinksync.questionInt("");
+            Item.procurarPorNumero(numero);
+
+
+
             keyPress();
             break;
 
             case 4:
             console.log(colors.fg.whitestrong, "\n\nAtualizar Dados do Item\n\n", colors.reset);
             
+            console.log("Digite o número do Item: ");
+            numero = readlinksync.questionInt("");
+            Item.procurarPorNumero(numero);
+
+            let item = Item.buscarNoArray(numero);
+
+            if (item != null) {
+
+                    console.log("Digite o Nome do Item: ");
+                    nome = readlinksync.question("");
+
+                    console.log("Digite o Modelo: ");
+                    modelo = readlinksync.question("");
+
+                    tipo = item.tipo;
+
+                    console.log("\nDigite a cor: ");
+                    cor= readlinksync.question("");
+
+                    console.log("\nDigite a quantidade: ");
+                    quantidade = readlinksync.questionInt("");
+
+                    switch (tipo) {
+                        case 1:
+                    console.log("\nDigite o Número do tamanho: [38 - P ] - [40 - M] - [42 - G]");
+                    tamanho = readlinksync.questionInt("");
+                    Item.cadastrar(new ItemBlusa(Item.gerarNumero(), nome, tipo,modelo, cor, quantidade,tamanho));
+                    break;
+
+                        case 2:
+                    console.log("\nDigite a numeração: ");
+                    numeracao = readlinksync.questionInt("");
+                    Item.cadastrar(new ItemCalca(Item.gerarNumero(),nome, tipo, modelo, cor, quantidade, numeracao));
+                    break;
+                    }
+
+                } else {
+                    console.log(colors.fg.red, "\nO número do Item: " + numero + 
+                    " não foi encontrado!", colors.reset);
+                }
+
+                keyPress()
+                break;
+
             keyPress();
             break;
 
             case 5: 
             console.log(colors.fg.whitestrong, "\n\nApagar o Item\n\n", colors.reset);
 
-            keyPress();
-            break;
-
-            case 6:
-            console.log(colors.fg.whitestrong, "\n\nSair\n\n", colors.reset);
+            console.log("Digite o número do Item: ");
+            numero = readlinksync.questionInt("");
+            Item.deletar(numero);
 
             keyPress();
             break;
@@ -89,10 +178,10 @@ while(true){
             keyPress();
             break;
         }
-
+    }
 }
 
-}
+
 
 export function sobre(): void {
     console.log("\n*****************************************************");
@@ -109,6 +198,5 @@ console.log("\nPressione enter para continuar...");
 readlinksync.prompt();
 }
 
-// Colocar a numeração e o tamanho em calça e blusa.
 
 main();

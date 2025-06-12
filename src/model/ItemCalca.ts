@@ -4,8 +4,8 @@ export class ItemCalca extends Item{
 
 private _numeracao: number;
 
-constructor(nome:string, tipo:number, modelo:string, cor:string, numeracao:number,quantidade:number){
-super(nome, tipo, modelo, cor, quantidade);
+constructor(numero: number, nome:string, tipo:number, modelo:string, cor:string, numeracao:number,quantidade:number){
+super(numero, nome, tipo, modelo, cor, quantidade);
 this._numeracao = numeracao;
 }
 
